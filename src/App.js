@@ -19,7 +19,7 @@ class App extends Component {
     this.setState({menuItem:item})
   }
 
-  unserLogin(telefono,password){
+  userLogin(telefono,password){
     if(telefono=="admin" && password=="1234"){
       this.setState({logged:true})
     }
@@ -28,7 +28,7 @@ class App extends Component {
   render(){
     let obj = <><Menu menuItem={this.state.menuItem} changeMenu={(item)=>this.changeMenu(item)} /></>
     if(!this.state.logged){
-      obj= <AppLogin unserLogin={(telefono,password)=>this.unserLogin(telefono,password)} />
+      obj= <AppLogin userLogin={(telefono,password)=>this.userLogin(telefono,password)} />
     }
     return (
       <div className="App">
