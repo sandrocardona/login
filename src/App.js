@@ -1,25 +1,41 @@
-import logo from './logo.svg';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Button} from 'reactstrap';
+import AppLogin from './componentes/Applogin';
+import Menu from './componentes/menu';
 import './App.css';
+import { Component } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      menuItem:"UNO",
+      logged:false,
+    }
+  }
+
+  changeMenu(item){
+    this.setState({menuItem:item})
+  }
+
+  unserLogin(telefono,password){
+    if(telefono=="admin" && password=="1234"){
+      this.setState({logged:true})
+    }
+  }
+
+  render(){
+    let obj = <><Menu menuItem={this.state.menuItem} changeMenu={(item)=>this.changeMenu(item)} /></>
+    if(!this.state.logged){
+      obj= <AppLogin unserLogin={(telefono,password)=>this.unserLogin(telefono,password)} />
+    }
+    return (
+      <div className="App">
+        {obj}
+      </div>
+    );
+  }
 }
 
 export default App;
